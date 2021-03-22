@@ -1,5 +1,6 @@
 abbr -a c cargo
 abbr -a e nvim
+abbr -a vim nvim
 abbr -a o xdg-open
 abbr -a g git
 abbr -a gc 'git checkout'
@@ -10,8 +11,14 @@ abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
 abbr -a pr 'gh pr create -t (git show -s --format=%s HEAD) -b (git show -s --format=%B HEAD | tail -n+3)'
 complete --command yay --wraps pacman
 
+if status is-login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+        exec sway
+    end
+end
+
 if status --is-interactive
-	tmux ^ /dev/null; and exec true
+	tmux attach ^ /dev/null; and exec true
 end
 
 if command -v yay > /dev/null
