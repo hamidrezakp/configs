@@ -18,7 +18,14 @@ if status is-login
 end
 
 if status --is-interactive
-	tmux attach ^ /dev/null; and exec true
+	if test -z "$TMUX"
+		set ID ( tmux ls | grep -vm1 attached | cut -d: -f1 ) # get the id of a deattached session
+		if test -z $ID # if not available create a new one
+			exec tmux new-session
+		else
+			exec tmux attach-session -t $ID # if available attach to it
+		end
+	end
 end
 
 if command -v yay > /dev/null
