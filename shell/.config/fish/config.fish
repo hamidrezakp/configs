@@ -13,7 +13,7 @@ complete --command yay --wraps pacman
 
 if status is-login
     if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-        exec sway
+			exec startx
     end
 end
 
@@ -164,11 +164,13 @@ setenv FZF_DEFAULT_OPTS '--height 20%'
 
 abbr -a nova 'env OS_PASSWORD=(pass www/mit-openstack | head -n1) nova'
 abbr -a glance 'env OS_PASSWORD=(pass www/mit-openstack | head -n1) glance'
-setenv OS_USERNAME jfrg@csail.mit.edu
-setenv OS_TENANT_NAME usersandbox_jfrg
-setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
-setenv OS_IMAGE_API_VERSION 1
-setenv OS_VOLUME_API_VERSION 2
+
+#setenv OS_USERNAME jfrg@csail.mit.edu
+#setenv OS_TENANT_NAME usersandbox_jfrg
+#setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
+#setenv OS_IMAGE_API_VERSION 1
+#setenv OS_VOLUME_API_VERSION 2
+
 function penv -d "Set up environment for the PDOS openstack service"
 	env OS_PASSWORD=(pass www/mit-openstack | head -n1) OS_TENANT_NAME=pdos OS_PROJECT_NAME=pdos $argv
 end
