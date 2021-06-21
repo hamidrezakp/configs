@@ -16,12 +16,13 @@ call plug#begin()
 Plug 'ciaranm/securemodelines'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-fugitive'
 
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'andymass/vim-matchup'
-Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Fuzzy finder
 Plug 'airblade/vim-rooter'
@@ -59,12 +60,15 @@ if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") == -1)
 endif
 set background=dark
 let base16colorspace=256
-"let g:base16_shell_path="~/dev/others/base16/templates/shell/scripts/"
-colorscheme dracula
+let g:base16_shell_path="~/dev/others/base16/templates/shell/scripts/"
+colorscheme base16-gruvbox-dark-hard
 syntax on
 hi Normal ctermbg=NONE
 " Brighter comments
 "call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
+" Brighter comments
+call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
+call Base16hi("CocHintSign", g:base16_gui03, "", g:base16_cterm03, "", "", "")
 
 " Plugin settings
 let g:secure_modelines_allowed_items = [
@@ -186,9 +190,9 @@ set wildmode=list:longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 " Use wide tabs
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 set noexpandtab
 
 " Wrapping options
@@ -425,6 +429,8 @@ noremap <leader>m ct_
 map <F1> <Esc>
 imap <F1> <Esc>
 
+" Create and open file under cursor
+nnoremap <silent> <leader>cf :e <C-R>=expand("%:p:h") . "/" . expand("<cfile>") <CR><CR>
 
 " =============================================================================
 " # Autocommands

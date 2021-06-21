@@ -162,6 +162,8 @@ setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
 setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 setenv FZF_DEFAULT_OPTS '--height 20%'
 
+setenv EDITOR 'nvim'
+
 abbr -a nova 'env OS_PASSWORD=(pass www/mit-openstack | head -n1) nova'
 abbr -a glance 'env OS_PASSWORD=(pass www/mit-openstack | head -n1) glance'
 

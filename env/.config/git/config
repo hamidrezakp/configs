@@ -45,3 +45,7 @@
 	annotate = yes
 [diff "odf"]
 	textconv = odt2txt
+[mergetool]
+  prompt = false
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"

@@ -1,3 +1,4 @@
 {
-  "codeLens.enable": true
+  "codeLens.enable": true,
+  "FSharp.EnableReferenceCodeLens": false
 }
