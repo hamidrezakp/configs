@@ -1,5 +1,6 @@
 abbr -a c cargo
 abbr -a e nvim
+abbr -a vim nvim
 abbr -a o xdg-open
 abbr -a g git
 abbr -a gc 'git checkout'
@@ -10,8 +11,25 @@ abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
 abbr -a pr 'gh pr create -t (git show -s --format=%s HEAD) -b (git show -s --format=%B HEAD | tail -n+3)'
 complete --command yay --wraps pacman
 
+if status is-login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+			exec startx
+    end
+end
+
 if status --is-interactive
-	tmux ^ /dev/null; and exec true
+	if test -d ~/dev/others/base16/templates/fish-shell
+		set fish_function_path $fish_function_path ~/dev/others/base16/templates/fish-shell/functions
+		builtin source ~/dev/others/base16/templates/fish-shell/conf.d/base16.fish
+	end
+	if test -z "$TMUX"
+		set ID ( tmux ls | grep -vm1 attached | cut -d: -f1 ) # get the id of a deattached session
+		if test -z $ID # if not available create a new one
+			exec tmux new-session
+		else
+			exec tmux attach-session -t $ID # if available attach to it
+		end
+	end
 end
 
 if command -v yay > /dev/null
@@ -148,13 +166,17 @@ setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
 setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 setenv FZF_DEFAULT_OPTS '--height 20%'
 
+setenv EDITOR 'nvim'
+
 abbr -a nova 'env OS_PASSWORD=(pass www/mit-openstack | head -n1) nova'
 abbr -a glance 'env OS_PASSWORD=(pass www/mit-openstack | head -n1) glance'
-setenv OS_USERNAME jfrg@csail.mit.edu
-setenv OS_TENANT_NAME usersandbox_jfrg
-setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
-setenv OS_IMAGE_API_VERSION 1
-setenv OS_VOLUME_API_VERSION 2
+
+#setenv OS_USERNAME jfrg@csail.mit.edu
+#setenv OS_TENANT_NAME usersandbox_jfrg
+#setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
+#setenv OS_IMAGE_API_VERSION 1
+#setenv OS_VOLUME_API_VERSION 2
+
 function penv -d "Set up environment for the PDOS openstack service"
 	env OS_PASSWORD=(pass www/mit-openstack | head -n1) OS_TENANT_NAME=pdos OS_PROJECT_NAME=pdos $argv
 end

@@ -1,7 +1,7 @@
 [user]
 	name = Hamid R. K. Pisghadam
 	email = hamidrkp@riseup.net
-	# signingkey = BC86115038EA36D52CA1FFF1B4288F5A4A34220B
+	signingkey = 075C9A91788B11F5F9D1A0F010FF6101D68D7DCA
 [ui "color"]
 	ui = always
 [color]
@@ -37,7 +37,7 @@
 	algorithm = patience
 	compactionHeuristic = true
 [commit]
-	# gpgsign = true
+	gpgsign = true
 [protocol]
 	version = 2
 [sendemail]
@@ -45,3 +45,7 @@
 	annotate = yes
 [diff "odf"]
 	textconv = odt2txt
+[mergetool]
+  prompt = false
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
