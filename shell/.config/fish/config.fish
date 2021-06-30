@@ -18,6 +18,10 @@ if status is-login
 end
 
 if status --is-interactive
+	if test -d ~/dev/others/base16/templates/fish-shell
+		set fish_function_path $fish_function_path ~/dev/others/base16/templates/fish-shell/functions
+		builtin source ~/dev/others/base16/templates/fish-shell/conf.d/base16.fish
+	end
 	if test -z "$TMUX"
 		set ID ( tmux ls | grep -vm1 attached | cut -d: -f1 ) # get the id of a deattached session
 		if test -z $ID # if not available create a new one

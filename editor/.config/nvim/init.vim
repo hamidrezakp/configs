@@ -8,7 +8,7 @@ let mapleader = "\<Space>"
 " Load vundle
 set nocompatible
 filetype off
-"set rtp+=~/dev/others/base16/templates/vim/
+set rtp+=~/dev/others/base16/templates/vim/
 call plug#begin()
 
 " Load plugins
@@ -22,7 +22,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'andymass/vim-matchup'
-"Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Fuzzy finder
 Plug 'airblade/vim-rooter'
@@ -38,6 +37,7 @@ Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'sheerun/vim-polyglot'
+"Plug 'fatih/vim-go'
 Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
@@ -64,8 +64,6 @@ let g:base16_shell_path="~/dev/others/base16/templates/shell/scripts/"
 colorscheme base16-gruvbox-dark-hard
 syntax on
 hi Normal ctermbg=NONE
-" Brighter comments
-"call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 " Brighter comments
 call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 call Base16hi("CocHintSign", g:base16_gui03, "", g:base16_cterm03, "", "", "")
@@ -148,7 +146,7 @@ set updatetime=300
 let g:go_play_open_browser = 0
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
-let g:go_bin_path = expand("~/dev/go/bin")
+"let g:go_bin_path = expand("~/dev/go/bin")
 
 " =============================================================================
 " # Editor settings
@@ -190,9 +188,9 @@ set wildmode=list:longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 " Use wide tabs
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set shiftwidth=8
+set softtabstop=8
+set tabstop=8
 set noexpandtab
 
 " Wrapping options
@@ -297,7 +295,7 @@ noremap <leader>p :read !xsel --clipboard --output<cr>
 noremap <leader>c :w !xsel -ib<cr><cr>
 
 " <leader>d for Rg search
-noremap <leader>d :Rg<CR>
+noremap <leader>d :Rg<cr>
 let g:fzf_layout = { 'down': '~20%' }
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -429,8 +427,6 @@ noremap <leader>m ct_
 map <F1> <Esc>
 imap <F1> <Esc>
 
-" Create and open file under cursor
-nnoremap <silent> <leader>cf :e <C-R>=expand("%:p:h") . "/" . expand("<cfile>") <CR><CR>
 
 " =============================================================================
 " # Autocommands
@@ -460,8 +456,6 @@ autocmd BufRead *.lds set filetype=ld
 autocmd BufRead *.tex set filetype=tex
 autocmd BufRead *.trm set filetype=c
 autocmd BufRead *.xlsx.axlsx set filetype=ruby
-autocmd BufRead *.fs set filetype=fsharp
-autocmd BufRead *.fsx set filetype=fsharp
 
 " Script plugins
 autocmd Filetype html,xml,xsl,php source ~/.config/nvim/scripts/closetag.vim
